@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+
+    webapp:
+        restart: always
+        build:
+            context: .
+            dockerfile: ./deploy/webapp/Dockerfile
+        volumes:
+            - .:/ineedmoney
+        command: pipenv run python manage.py runserver 0.0.0.0:8006
+        ports:
+            - "8006:8006"
+            - "3000:3000"  # debugging service (ptvsd)
+        env_file:
+            - ./.env
+        depends_on:
+            - pgsql
+
+    pgsql:
+        image: postgres
+        ports:
+            - 8442:5432
+        volumes:
+        - ./deploy/data/:/docker-entrypoint-initdb.d
+        env_file:
+            - ./.env
