@@ -9,6 +9,8 @@ verify_ssl = true
 django = "*"
 ptvsd = "*"
 psycopg2-binary = "*"
+django-model-utils = "*"
+django-jet = "*"
 
 [requires]
 python_version = "3.7"

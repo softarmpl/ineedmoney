@@ -22,18 +22,20 @@ SECRET_KEY = 'rhy(y3+2v7@*q+0_64#o4r8ltta$n2t4g&^86gq2q=b00qvhyx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+TEMPLATE_DEBUG = True
+
 ALLOWED_HOSTS = ['*']
 
-
-# Application definition
-
 INSTALLED_APPS = [
+    # 'jet.dashboard',
+    # 'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'budgets',
 ]
 
 MIDDLEWARE = [
@@ -48,6 +50,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'ineedmoney.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -60,12 +63,13 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': False,
         },
     },
 ]
 
-WSGI_APPLICATION = 'ineedmoney.wsgi.application'
 
+WSGI_APPLICATION = 'ineedmoney.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -84,8 +88,6 @@ DATABASES = {
         'PASSWORD': POSTGRES_PASSWORD,
     }
 }
-
-
 
 
 # Password validation
