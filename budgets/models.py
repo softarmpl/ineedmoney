@@ -40,6 +40,7 @@ class Item(NamedModel):
     (INCOME, 'Income'),
     (EXPENSE, 'Expense'),
   ]
+  name = models.CharField(max_length=120)
   direction = models.CharField(max_length=120,
                                 choices=DIRECTION_CHOICES,
                                 default=EXPENSE)
@@ -50,8 +51,8 @@ class Item(NamedModel):
   payee = models.ManyToManyField(Payee)
   # split = models.BooleanField(default=False)
   target = models.ForeignKey(Target, blank=True, null=True, on_delete=None)
-  budget = models.ForeignKey(Budget, on_delete=None, null=True)
+  budget = models.ForeignKey(Budget, on_delete=None, null=True, blank=True)
 
   def save(self, *args, **kwargs):
-    
+    self.budget = Budget.objects.last()
     super().save(*args, **kwargs)
