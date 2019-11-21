@@ -35,6 +35,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'colorful',
+    'rangefilter',
     'budgets',
 ]
 
@@ -77,6 +79,7 @@ WSGI_APPLICATION = 'ineedmoney.wsgi.application'
 POSTGRES_HOST = get_setting('POSTGRES_HOST')
 POSTGRES_DB = get_setting('POSTGRES_DB')
 POSTGRES_USER = get_setting('POSTGRES_USER')
+POSTGRES_PORT = get_setting('POSTGRES_PORT')
 POSTGRES_PASSWORD = get_setting('POSTGRES_PASSWORD')
 
 DATABASES = {
@@ -85,6 +88,7 @@ DATABASES = {
         'HOST': POSTGRES_HOST,
         'NAME': POSTGRES_DB,
         'USER': POSTGRES_USER,
+        'PORT': POSTGRES_PORT,
         'PASSWORD': POSTGRES_PASSWORD,
     }
 }

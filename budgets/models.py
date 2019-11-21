@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from model_utils.models import TimeStampedModel
 from django.utils import timezone
+from colorful.fields import RGBColorField
 
 
 class NamedModel(TimeStampedModel):
@@ -12,6 +13,7 @@ class NamedModel(TimeStampedModel):
 
   class Meta:
     abstract = True
+    ordering = ['name']
 
   def __str__(self):
     return self.name
@@ -22,7 +24,7 @@ class Budget(NamedModel):
 
 
 class Category(NamedModel):
-  pass
+  color = RGBColorField(default='#2d4d80')
 
 
 class Target(NamedModel):

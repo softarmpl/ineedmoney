@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+autopep8 = "*"
 
 [packages]
 django = "*"
@@ -11,6 +12,8 @@ ptvsd = "*"
 psycopg2-binary = "*"
 django-model-utils = "*"
 django-jet = "*"
+django-colorful = "*"
+django-admin-rangefilter = "*"
 
 [requires]
 python_version = "3.7"

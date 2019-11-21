@@ -1,55 +1,63 @@
 {% extends "admin/change_list.html" %}
 {% load static %}
 {% block content %}
-<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.1/dist/Chart.min.js"></script>
 
-
-<canvas id="myChart" width="400" height="400"></canvas>
-
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-</script>
-
-</script>
-
-<h1>Custom message!</h1>
 
 <!-- Render the rest of the ChangeList view by calling block.super -->
 {{ block.super }}
+
+
+<b/>
+<h2>Charts</h2>
+
+<canvas id="categories" width="1200" height="900" style="float:left"></canvas>
+<canvas id="incomes-expenses" width="600" height="900"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.1/dist/Chart.min.js"></script>
+<script>
+var ctx = document.getElementById('categories').getContext('2d');
+var ctx2 = document.getElementById('incomes-expenses').getContext('2d');
+var category_data = {{ category_data|safe }};
+var labels = Array.from(category_data, x => x.category__name);
+var values = Array.from(category_data, x => x.amount__sum);
+var colors = Array.from(category_data, x => x.category__color);
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'amount',
+            data: values,
+            backgroundColor: colors
+        }]
+    },
+    options: {
+        responsive: false,
+    }
+    });
+
+
+    // chart incomes expenses
+    var income_expenses = {{ income_expenses|safe }};
+    var labels = Array.from(income_expenses, x => x.direction);
+    var values = Array.from(income_expenses, x => x.amount__sum);
+    var colors = ['#f54542', '#21a34e']
+    var myChart2 = new Chart(ctx2, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'amount',
+            data: values,
+            backgroundColor: colors
+        }]
+    },
+    options: {
+        responsive: false,
+    }
+    });
+
+</script>
+
+
 {% endblock %}
